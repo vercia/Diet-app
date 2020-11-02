@@ -1,19 +1,21 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import React, {useContext} from 'react';
+import { View, StyleSheet } from 'react-native';
 import MacroElement from './MacroElement';
+import Calories from './Calories'
+import {AppContext} from './AppContext'
 
 const HomeScreen = () => {
+  const { proteins, fats, carbos } = useContext(AppContext);
+
   const macroInfo = [
-    { header: 'Węglowodany', firstValue: 0, secondValue: 24 },
-    { header: 'Białka', firstValue: 0, secondValue: 24 },
-    { header: 'Tłuszcze', firstValue: 0, secondValue: 24 }
+    { header: 'Węglowodany', firstValue: 0, secondValue: carbos },
+    { header: 'Białka', firstValue: 0, secondValue: proteins },
+    { header: 'Tłuszcze', firstValue: 0, secondValue: fats }
   ];
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home 123!</Text>
-      <ProgressBar progress={0.5} color={'black'} style={styles.progressBar} />
+      <Calories />
       <View style={styles.macroInfo}>
         {macroInfo.map((item) => {
           return (
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: '90%',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    top: 20
   }
 });
 
