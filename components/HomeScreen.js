@@ -5,12 +5,12 @@ import Calories from './Calories'
 import {AppContext} from './AppContext'
 
 const HomeScreen = () => {
-  const { proteins, fats, carbos } = useContext(AppContext);
+  const { proteins, fats, carbos, eatenCarbos, eatenProteins, eatenFats } = useContext(AppContext);
 
   const macroInfo = [
-    { header: 'Węglowodany', firstValue: 0, secondValue: carbos },
-    { header: 'Białka', firstValue: 0, secondValue: proteins },
-    { header: 'Tłuszcze', firstValue: 0, secondValue: fats }
+    { header: 'Węglowodany', firstValue: eatenCarbos, secondValue: carbos },
+    { header: 'Białka', firstValue: eatenProteins, secondValue: proteins },
+    { header: 'Tłuszcze', firstValue: eatenFats, secondValue: fats }
   ];
 
   return (
