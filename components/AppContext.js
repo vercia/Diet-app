@@ -16,14 +16,17 @@ export default function AppContextProvider(props) {
   const [eatenCarbos, setEatenCarbos] = useState(0);
   const [eatenProteins, setEatenProteins] = useState(0);
   const [eatenFats, setEatenFats] = useState(0);
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(0);
 
-  const register = (nameText, ageText, genderText, weightText, heightText) => {
-    setName(nameText);
+  const submitForm = (ageText, genderText, weightText, heightText) => {
     setAge(ageText);
     setGender(genderText);
     setWeight(weightText);
     setHeight(heightText);
+  };
+
+  const register = (nameText) => {
+    setName(nameText);
   };
 
   useEffect(() => {
@@ -34,8 +37,8 @@ export default function AppContextProvider(props) {
   }, [weight, age]);
 
   useEffect(() => {
-    setProgress(eatenCalories/calories)
-  },[eatenCalories])
+    setProgress(eatenCalories / calories);
+  }, [eatenCalories]);
 
   const eatenMeal = (calories, carbos, proteins, fats) => {
     setEatenCalories(Math.floor(eatenCalories + calories));
@@ -44,10 +47,15 @@ export default function AppContextProvider(props) {
     setEatenFats(Math.floor(eatenFats + fats));
   };
 
+  const submitEdit = (item,func) => {
+    func(item)
+  }
+
   return (
     <AppContext.Provider
       value={{
         register,
+        submitForm,
         name,
         age,
         gender,
@@ -62,7 +70,9 @@ export default function AppContextProvider(props) {
         eatenProteins,
         eatenFats,
         eatenMeal,
-        progress
+        progress,
+        submitEdit,
+        setAge
       }}
     >
       {props.children}
