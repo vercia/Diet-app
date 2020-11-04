@@ -1,62 +1,35 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './components/HomeScreen';
-import FoodScreen from './components/FoodScreen';
-import SettingsScreen from './components/SettingsScreen';
-import SingUpScreen from './components/SignUpScreen';
-import { Ionicons } from '@expo/vector-icons';
-import AppContextProvider from './components/AppContext';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Profile from './components/Profile';
+import AppContextProvider from './components/AppContext';
+import LogInScreen from './components/LogInScreen';
+import RegistrationScreen from './components/RegistrationScreen';
+import FormScreen from './components/FormScreen'
+import TabNavigator from './components/TabNavigator'
 
-const Tab = createBottomTabNavigator();
+const LogInStack = createStackNavigator()
 
-const SettingsStack = createStackNavigator();
-function SettingsStackScreen() {
+function LogInStackScreen() {
   return (
-    <SettingsStack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}
-    >
-      <SettingsStack.Screen name='Settings' component={SettingsScreen} />
-      <SettingsStack.Screen name='Profile' component={Profile} />
-    </SettingsStack.Navigator>
+    <LogInStack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <LogInStack.Screen name='LogIn' component={LogInScreen} />
+      <LogInStack.Screen name='Registration' component={RegistrationScreen} />
+      <LogInStack.Screen name='Form' component={FormScreen} />
+      <LogInStack.Screen name='Home' component={TabNavigator} />
+    </LogInStack.Navigator>
   );
 }
 
-export default function App() {
+const App = () => {
   return (
     <PaperProvider theme={theme}>
       <AppContextProvider>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let iconName;
-                if (route.name === 'Home') {
-                  iconName = 'ios-home';
-                } else if (route.name === 'Food') {
-                  iconName = 'ios-restaurant';
-                } else if (route.name === 'Settings') {
-                  iconName = 'ios-settings';
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-              }
-            })}
-            tabBarOptions={{
-              activeTintColor: 'tomato',
-              inactiveTintColor: 'gray'
-            }}
-          >
-            <Tab.Screen name='Home' component={HomeScreen} />
-            <Tab.Screen name='Food' component={FoodScreen} />
-            <Tab.Screen name='Settings' component={SettingsStackScreen} />
-            <Tab.Screen name='SignUp' component={SingUpScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <NavigationContainer>{LogInStackScreen()}</NavigationContainer>
+        <StatusBar hidden={true} />
       </AppContextProvider>
     </PaperProvider>
   );
@@ -71,3 +44,5 @@ const theme = {
     accent: '#f1c40f'
   }
 };
+
+export default App
