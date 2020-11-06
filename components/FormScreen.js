@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 
 import { AppContext } from './AppContext';
+import TextInputForm from './TextInputForm';
 
-const FormScreen = ({navigation}) => {
+const FormScreen = ({ navigation }) => {
   const { submitForm } = useContext(AppContext);
   const [ageText, setAgeText] = useState();
   const [genderText, setGenderText] = useState();
@@ -20,21 +20,46 @@ const FormScreen = ({navigation}) => {
   const clearForm = () => {
     setAgeText('');
     setGenderText(placeholder.label);
-    // setGenderText(null);
     setWeightText('');
     setHeightText('');
   };
+
+  const arrForm = [
+    {
+      label: 'Wiek',
+      keyboardType: 'number-pad',
+      value: ageText ,
+      onChangeText: (text) => setAgeText(text)
+    },
+    {
+      label: 'Waga',
+      keyboardType: 'numeric',
+      value: weightText,
+      onChangeText: (text) => setWeightText(text)
+    },
+    {
+      label: 'Wzrost (cm)',
+      keyboardType: 'numeric',
+      value: heightText,
+      onChangeText: (text) => setHeightText(text)
+    }
+  ];
 
   return (
     <View style={{ flex: 1 }}>
       <Text style={{ fontSize: 30 }}>Formularz</Text>
       <View>
-        <TextInput
-          label='Wiek'
-          keyboardType='number-pad'
-          value={ageText}
-          onChangeText={(text) => setAgeText(text)}
-        />
+        {arrForm.map((item) => {
+          return (
+            <TextInputForm
+              key={item.label}
+              label={item.label}
+              keyboardType={item.keyboardType}
+              value={item.value}
+              onChangeText={item.onChangeText}
+            />
+          );
+        })}
         <RNPickerSelect
           onValueChange={(text) => setGenderText(text)}
           items={[
@@ -54,18 +79,6 @@ const FormScreen = ({navigation}) => {
             }
           }}
           placeholder={placeholder}
-        />
-        <TextInput
-          label='Waga'
-          value={weightText}
-          keyboardType='numeric'
-          onChangeText={(text) => setWeightText(text)}
-        />
-        <TextInput
-          label='Wzrost'
-          value={heightText}
-          keyboardType='numeric'
-          onChangeText={(text) => setHeightText(text)}
         />
         <Button
           title='Zatwierdź'

@@ -1,28 +1,51 @@
 import React, { useContext, useState } from 'react';
 import { View, Text } from 'react-native';
-import {
-  Avatar,
-  List,
-  Dialog,
-  Portal,
-  Paragraph,
-  Button,
-  TextInput
-} from 'react-native-paper';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Avatar, List } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from './AppContext';
+import DialogProfile from './DialogProfile';
 
 const Profile = ({ navigation }) => {
-  const { gender, age, height, weight, submitEdit, setAge } = useContext(
-    AppContext
-  );
+  const {
+    gender,
+    age,
+    height,
+    weight,
+    submitEdit,
+    setAge,
+    setHeight,
+    setWeight
+  } = useContext(AppContext);
   const [ageText, setAgeText] = useState();
+  const [heightText, setHeightText] = useState();
+  const [weightText, setWeightText] = useState();
 
-  const [visible, setVisible] = React.useState(false);
-
-  const showDialog = () => setVisible(true);
-
-  const hideDialog = () => setVisible(false);
+  const arrDialog = [
+    {
+      title: `Wiek: ${age}`,
+      label: 'Wiek',
+      keyboardType: 'number-pad',
+      value: ageText,
+      onChangeText: (text) => setAgeText(text),
+      submitEdit: submitEdit(ageText, setAge)
+    },
+    {
+      title: `Wzrost: ${height}`,
+      label: 'Wzrost',
+      keyboardType: 'number-pad',
+      value: heightText,
+      onChangeText: (text) => setHeightText(text),
+      submitEdit: submitEdit(heightText, setHeight)
+    },
+    {
+      title: `Waga: ${weight}`,
+      label: 'Waga',
+      keyboardType: 'number-pad',
+      value: weightText,
+      onChangeText: (text) => setWeightText(text),
+      submitEdit: submitEdit(weightText, setWeight)
+    }
+  ];
 
   return (
     <View>
@@ -37,56 +60,20 @@ const Profile = ({ navigation }) => {
       <List.Section>
         <List.Subheader>Twój stary</List.Subheader>
         <List.Item title={`Płeć: ${gender}`} />
-        <List.Item
-          title={`Wiek: ${age}`}
-          right={() => (
-            <MaterialCommunityIcons
-              name='pencil'
-              size={24}
-              color='black'
-              onPress={showDialog}
+        {arrDialog.map((item) => {
+          return (
+            <DialogProfile
+              key={item.label}
+              title={item.title}
+              label={item.label}
+              keyboardType={item.keyboardType}
+              value={item.value}
+              onChangeText={item.onChangeText}
+              submitEdit={item.submitEdit}
             />
-          )}
-        />
-        <List.Item
-          title={`Wzrost: ${height}`}
-          right={() => (
-            <MaterialCommunityIcons name='pencil' size={24} color='black' />
-          )}
-        />
-        <List.Item
-          title={`Waga: ${weight}`}
-          right={() => (
-            <MaterialCommunityIcons name='pencil' size={24} color='black' />
-          )}
-        />
+          );
+        })}
       </List.Section>
-
-      <View>
-        <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Edit</Dialog.Title>
-            <Dialog.Content>
-              <TextInput
-                label='Wiek'
-                keyboardType='number-pad'
-                value={ageText}
-                onChangeText={(text) => setAgeText(text)}
-              />
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button
-                onPress={() => {
-                  hideDialog();
-                  submitEdit(ageText, setAge);
-                }}
-              >
-                Done
-              </Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-      </View>
     </View>
   );
 };

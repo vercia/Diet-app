@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { Text, View, Button } from 'react-native';
 import { AppContext } from './AppContext';
+import TextInputRegistration from './TextInputRegistration';
 
 const RegistrationScreen = ({ navigation }) => {
   const { register } = useContext(AppContext);
@@ -11,31 +11,45 @@ const RegistrationScreen = ({ navigation }) => {
     setNameText('');
   };
 
+  const arrRegistration = [
+    {
+      label: 'Imię',
+      keyboardType: 'default',
+      value: nameText,
+      onChangeText: (text) => setNameText(text)
+    },
+    {
+      label: 'Email',
+      keyboardType: 'email-address'
+    },
+    {
+      label: 'Hasło',
+      keyboardType: 'default',
+      secureTextEntry: true
+    },
+    {
+      label: 'Potwierdź hasło',
+      keyboardType: 'default',
+      secureTextEntry: true
+    }
+  ];
+
   return (
     <View style={{ flex: 1 }}>
       <Text style={{ fontSize: 30 }}>Rejestracja</Text>
       <View>
-        <TextInput
-          label='Imię'
-          value={nameText}
-          onChangeText={(text) => setNameText(text)}
-        />
-        <TextInput
-          label='Email'
-          value={nameText}
-          keyboardType='email-address'
-          onChangeText={(text) => setNameText(text)}
-        />
-        <TextInput
-          label='Hasło'
-          keyboardType='password'
-          secureTextEntry={true}
-        />
-        <TextInput
-          label='Potwierdź hasło'
-          keyboardType='password'
-          secureTextEntry={true}
-        />
+        {arrRegistration.map((item) => {
+          return (
+            <TextInputRegistration
+              key={item.label}
+              label={item.label}
+              value={item.value}
+              onChangeText={item.onChangeText}
+              keyboardType={item.keyboardType}
+              secureTextEntry={item.secureTextEntry}
+            />
+          );
+        })}
         <Button
           title='Cofnij'
           onPress={() => {
@@ -53,7 +67,5 @@ const RegistrationScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default RegistrationScreen;
