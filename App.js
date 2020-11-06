@@ -47,8 +47,10 @@ const themePaper = {
   roundness: 2,
   colors: {
     ...PaperDefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f'
+    primary: '#00dfc0',
+    accent: '#f1c40f',
+    background: 'rgba(210,207,206,.3)',
+    text: 'white'
   }
 };
 
@@ -57,8 +59,8 @@ const themeNavigation = {
   colors: {
     ...NavigationDefaultTheme.colors,
     primary: 'green',
-    card: 'orange',
-    background: 'grey'
+    card: '#222222',
+    background: '#5b2a83'
   }
 };
 
