@@ -72,7 +72,9 @@ export default function AppContextProvider(props) {
         eatenMeal,
         progress,
         submitEdit,
-        setAge
+        setAge,
+        setHeight,
+        setWeight
       }}
     >
       {props.children}
