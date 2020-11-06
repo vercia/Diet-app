@@ -1,11 +1,18 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import MacroElement from './MacroElement';
-import Calories from './Calories'
-import {AppContext} from './AppContext'
+import Calories from './Calories';
+import { AppContext } from './AppContext';
 
 const HomeScreen = () => {
-  const { proteins, fats, carbos, eatenCarbos, eatenProteins, eatenFats } = useContext(AppContext);
+  const {
+    proteins,
+    fats,
+    carbos,
+    eatenCarbos,
+    eatenProteins,
+    eatenFats
+  } = useContext(AppContext);
 
   const macroInfo = [
     { header: 'Węglowodany', firstValue: eatenCarbos, secondValue: carbos },
@@ -20,6 +27,7 @@ const HomeScreen = () => {
         {macroInfo.map((item) => {
           return (
             <MacroElement
+              key={item.header}
               header={item.header}
               firstValue={item.firstValue}
               secondValue={item.secondValue}
