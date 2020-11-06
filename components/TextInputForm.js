@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
+import styles from './Styles'
 
 const TextInputForm = (props) => {
   return (
@@ -8,6 +9,7 @@ const TextInputForm = (props) => {
       keyboardType={props.keyboardType}
       value={props.value}
       onChangeText={props.onChangeText}
+      style={styles.input}
     />
   );
 };

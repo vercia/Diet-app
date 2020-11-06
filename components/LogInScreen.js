@@ -1,27 +1,40 @@
-import React, {useContext} from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React from 'react';
+import { View, Image } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
+import styles from './Styles';
 
-const LogInScreen = ({navigation}) => {
+const LogInScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 30 }}>Logowanie</Text>
-      <View>
-        <TextInput label='Email' keyboardType='email-address' />
-        <TextInput label='Hasło' secureTextEntry={true} />
-        <Button
-          title='Zaloguj'
-          onPress={() => navigation.navigate('Home')}
-        ></Button>
-        <Button
-          title='Zajerestruj się'
-          onPress={() => navigation.navigate('Registration')}
-        ></Button>
-      </View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Image
+        style={styles.tinyLogo}
+        source={require('../images/logo.png')}
+        style={{ width: 220, height: 220 }}
+      />
+      <TextInput
+        style={styles.input}
+        label='Email'
+        keyboardType='email-address'
+      />
+      <TextInput style={styles.input} label='Hasło' secureTextEntry={true} />
+      <Button
+        onPress={() => navigation.navigate('Home')}
+        style={styles.button}
+        color='#222222'
+        labelStyle={{ fontSize: 16 }}
+      >
+        Zaloguj
+      </Button>
+      <Button
+        onPress={() => navigation.navigate('Registration')}
+        style={styles.button}
+        color='#222222'
+        labelStyle={{ fontSize: 16 }}
+      >
+        Zajerestruj się
+      </Button>
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default LogInScreen;

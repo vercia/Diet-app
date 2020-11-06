@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import { AppContext } from './AppContext';
 import TextInputRegistration from './TextInputRegistration';
+import styles from './Styles';
 
 const RegistrationScreen = ({ navigation }) => {
   const { register } = useContext(AppContext);
@@ -35,9 +37,8 @@ const RegistrationScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 30 }}>Rejestracja</Text>
-      <View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}>
+      <Text style={{ fontSize: 32, color: 'white', opacity: .9, bottom: 15 }}>Załóż konto</Text>
         {arrRegistration.map((item) => {
           return (
             <TextInputRegistration
@@ -51,19 +52,26 @@ const RegistrationScreen = ({ navigation }) => {
           );
         })}
         <Button
-          title='Cofnij'
           onPress={() => {
             navigation.navigate('LogIn');
           }}
-        ></Button>
+          style={styles.button}
+          color='#222222'
+          labelStyle={{ fontSize: 16 }}
+        >
+          Cofnij
+        </Button>
         <Button
-          title='Dalej'
           onPress={() => {
             register(nameText), clearForm();
             navigation.navigate('Form');
           }}
-        ></Button>
-      </View>
+          style={styles.button}
+          color='#222222'
+          labelStyle={{ fontSize: 16 }}
+        >
+          Dalej
+        </Button>
     </View>
   );
 };

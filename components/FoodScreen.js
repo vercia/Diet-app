@@ -3,13 +3,14 @@ import { View, FlatList } from 'react-native';
 import Axios from 'axios';
 import { Button, Searchbar } from 'react-native-paper';
 import FoodCard from './FoodCard';
+import styles from './Styles';
 
 const FoodScreen = () => {
   const [dataSource, setDataSource] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const APP_ID = '0da0cfb7b';
-  const APP_KEY = '0ba13508b45aa51cef52145df6da55605';
+  const APP_ID = 'da0cfb7b';
+  const APP_KEY = 'ba13508b45aa51cef52145df6da55605';
 
   const getData = async () => {
     const result = await Axios.get(
@@ -39,13 +40,28 @@ const FoodScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
+    <View
+      style={{
+        flex: 1,
+        padding: 24,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
       <Searchbar
         placeholder='Search'
         onChangeText={onChangeSearch}
         value={searchQuery}
+        style={styles.searchBar}
       />
-      <Button onPress={getData}>Search</Button>
+      <Button
+        onPress={getData}
+        style={[styles.button, { marginBottom: 10 }]}
+        color='#222222'
+        labelStyle={{ fontSize: 16 }}
+      >
+        Search
+      </Button>
       <FlatList
         data={dataSource}
         renderItem={render}

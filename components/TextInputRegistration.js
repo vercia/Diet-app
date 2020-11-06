@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
+import styles from './Styles'
 
 const TextInputRegistration = (props) => {
   return (
@@ -9,6 +10,7 @@ const TextInputRegistration = (props) => {
       onChangeText={props.onChangeText}
       keyboardType={props.keyboardType}
       secureTextEntry={props.secureTextEntry}
+      style={styles.input}
     />
   );
 };

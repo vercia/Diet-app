@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './HomeScreen';
 import FoodScreen from './FoodScreen';
-import SettingsStackScreen from './SettingsNavigator'
+import SettingsStackScreen from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,8 +24,9 @@ const TabNavigator = () => {
         }
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray'
+        activeTintColor: '#00dfc0',
+        inactiveTintColor: 'rgba(210,207,206,.3)',
+        style: { borderTopWidth: 0 }
       }}
     >
       <Tab.Screen name='Home' component={HomeScreen} />

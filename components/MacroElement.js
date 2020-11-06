@@ -1,22 +1,14 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import styles from './Styles'
 
 const MacroElement = (props) => {
   return (
       <View style={{ alignItems: 'center'}}>
-        <Text>{props.header}</Text>
-        <Text>{props.firstValue}/{props.secondValue}</Text>
+        <Text style={styles.macroTitle}>{props.header}</Text>
+        <Text style={styles.macrosDesc}>{props.firstValue}/{props.secondValue}</Text>
       </View>
   );
 };
-
-// const styles = StyleSheet.create({
-//   progressBar: {
-//     backgroundColor: 'yellow',
-//     width: 200,
-//     height: 200,
-//     borderRadius: 100
-//   }
-// });
 
 export default MacroElement;

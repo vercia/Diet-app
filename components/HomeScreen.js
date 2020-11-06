@@ -41,7 +41,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   progressBar: {
-    backgroundColor: 'yellow',
+    backgroundColor: 'red',
     width: 200,
     height: 200,
     borderRadius: 100

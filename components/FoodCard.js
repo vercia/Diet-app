@@ -7,8 +7,9 @@ import {
   Dialog,
   Portal
 } from 'react-native-paper';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { AppContext } from './AppContext';
+import styles from './Styles';
 
 const FoodCard = (props) => {
   const { eatenMeal } = useContext(AppContext);
@@ -20,21 +21,33 @@ const FoodCard = (props) => {
   const hideDialog = () => setVisible(false);
 
   return (
-    <Card>
-      <Card.Cover source={{ uri: props.image }} />
-      <Card.Content>
-        <Title>{props.title}</Title>
-        <Paragraph>Calories: {Math.floor(props.calories)}</Paragraph>
-        <Paragraph>Carbos: {Math.floor(props.carbos)}</Paragraph>
-        <Paragraph>Proteins: {Math.floor(props.proteins)}</Paragraph>
-        <Paragraph>Fats: {Math.floor(props.fats)}</Paragraph>
+    <Card style={styles.foodCard} borderRadius={50}>
+      <Card.Cover style={styles.foodCardImage} source={{ uri: props.image }} />
+      <Card.Content style={styles.foodCardContent}>
+        <Title >{props.title}</Title>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Paragraph>Calories: {Math.floor(props.calories)}</Paragraph>
+          <Paragraph>Carbos: {Math.floor(props.carbos)}</Paragraph>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Paragraph>Proteins: {Math.floor(props.proteins)}</Paragraph>
+          <Paragraph>Fats: {Math.floor(props.fats)}</Paragraph>
+        </View>
       </Card.Content>
-      <Card.Actions>
-        <Button onPress={showDialog}>OPEN</Button>
+      <Card.Actions style={styles.foodCardActions}>
+        <Button
+          onPress={showDialog}
+          color='#00dfc0'
+          labelStyle={{ fontSize: 16 }}
+        >
+          OPEN
+        </Button>
         <Button
           onPress={() =>
             eatenMeal(props.calories, props.carbos, props.proteins, props.fats)
           }
+          color='#00dfc0'
+          labelStyle={{ fontSize: 16 }}
         >
           ADD
         </Button>

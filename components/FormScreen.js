@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import { Button } from 'react-native-paper';
 
 import { AppContext } from './AppContext';
 import TextInputForm from './TextInputForm';
+import styles from './Styles';
 
 const FormScreen = ({ navigation }) => {
   const { submitForm } = useContext(AppContext);
@@ -28,7 +30,7 @@ const FormScreen = ({ navigation }) => {
     {
       label: 'Wiek',
       keyboardType: 'number-pad',
-      value: ageText ,
+      value: ageText,
       onChangeText: (text) => setAgeText(text)
     },
     {
@@ -46,49 +48,48 @@ const FormScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 30 }}>Formularz</Text>
-      <View>
-        {arrForm.map((item) => {
-          return (
-            <TextInputForm
-              key={item.label}
-              label={item.label}
-              keyboardType={item.keyboardType}
-              value={item.value}
-              onChangeText={item.onChangeText}
-            />
-          );
-        })}
-        <RNPickerSelect
-          onValueChange={(text) => setGenderText(text)}
-          items={[
-            { label: 'Mężczyzna', value: 'mężczyzna' },
-            { label: 'Kobieta', value: 'kobieta' }
-          ]}
-          style={{
-            ...pickerSelectStyles,
-            iconContainer: {
-              top: 20,
-              right: 10
-            },
-            placeholder: {
-              color: 'purple',
-              fontSize: 12,
-              fontWeight: 'bold'
-            }
-          }}
-          placeholder={placeholder}
-        />
-        <Button
-          title='Zatwierdź'
-          onPress={() => {
-            submitForm(ageText, genderText, weightText, heightText),
-              clearForm();
-            navigation.navigate('Home');
-          }}
-        ></Button>
-      </View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: 32, color:'white', opacity: .9 }}>Formularz</Text>
+      {/* <View> */}
+      {arrForm.map((item) => {
+        return (
+          <TextInputForm
+            key={item.label}
+            label={item.label}
+            keyboardType={item.keyboardType}
+            value={item.value}
+            onChangeText={item.onChangeText}
+          />
+        );
+      })}
+      <RNPickerSelect
+        onValueChange={(text) => setGenderText(text)}
+        items={[
+          { label: 'Mężczyzna', value: 'mężczyzna' },
+          { label: 'Kobieta', value: 'kobieta' }
+        ]}
+        style={{
+          ...pickerSelectStyles,
+          placeholder: {
+            color: '#222222',
+            fontSize: 16,
+            backgroundColor: 'rgba(210,207,206,.3)'
+          }
+        }}
+        placeholder={placeholder}
+      />
+      <Button
+        onPress={() => {
+          submitForm(ageText, genderText, weightText, heightText), clearForm();
+          navigation.navigate('Home');
+        }}
+        style={styles.button}
+        color='#222222'
+        labelStyle={{ fontSize: 16 }}
+      >
+        Zatwierdź
+      </Button>
+      {/* </View> */}
     </View>
   );
 };
@@ -98,22 +99,13 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    height: 150,
-    borderRadius: 4,
-    color: 'black',
-    paddingRight: 30 // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
-    borderRadius: 8,
-    color: 'black',
-    paddingRight: 30 // to ensure the text is never behind the icon
+    height: 65,
+    width: '80%',
+    borderRadius: 10,
+    color: '#222222',
+    paddingRight: 30,
+    backgroundColor: 'rgba(210,207,206,.3)',
+    marginTop: 10
   }
 });
 
