@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   button: {
     backgroundColor: '#00dfc0',
-    width: '60%',
-    height: 55,
+    width: '50%',
+    height: 50,
     justifyContent: 'center',
     marginTop: 15,
     borderRadius: 10
@@ -29,7 +29,6 @@ export default StyleSheet.create({
   macroTitle: {
     color: '#222',
     fontSize: 22
-    // bottom: 10
   },
   macrosDesc: {
     color: 'white',

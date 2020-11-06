@@ -2,9 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Button } from 'react-native-paper';
-
 import { AppContext } from './AppContext';
-import TextInputForm from './TextInputForm';
+import Input from './Input';
 import styles from './Styles';
 
 const FormScreen = ({ navigation }) => {
@@ -49,19 +48,21 @@ const FormScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 32, color:'white', opacity: .9 }}>Formularz</Text>
+      <Text style={{ fontSize: 32, color: 'white', opacity: 0.9 }}>
+        Formularz
+      </Text>
       {/* <View> */}
-      {arrForm.map((item) => {
-        return (
-          <TextInputForm
-            key={item.label}
-            label={item.label}
-            keyboardType={item.keyboardType}
-            value={item.value}
-            onChangeText={item.onChangeText}
-          />
-        );
-      })}
+        {arrForm.map((item) => {
+          return (
+            <Input
+              key={item.label}
+              label={item.label}
+              keyboardType={item.keyboardType}
+              value={item.value}
+              onChangeText={item.onChangeText}
+            />
+          );
+        })}
       <RNPickerSelect
         onValueChange={(text) => setGenderText(text)}
         items={[
