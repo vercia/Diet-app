@@ -59,7 +59,7 @@ const RegistrationScreen = ({ navigation }) => {
             navigation.navigate('LogIn');
           }}
           style={[styles.button, { width: '30%', margin: 10 }]}
-          color='#222222'
+          color='#5b2a83'
           labelStyle={{ fontSize: 16 }}
         >
           Cofnij
@@ -70,7 +70,7 @@ const RegistrationScreen = ({ navigation }) => {
             navigation.navigate('Form');
           }}
           style={[styles.button, { width: '30%', margin: 10 }]}
-          color='#222222'
+          color='#5b2a83'
           labelStyle={{ fontSize: 16 }}
         >
           Dalej
