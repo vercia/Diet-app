@@ -1,5 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Button } from 'react-native-paper';
 import { AppContext } from './AppContext';
@@ -47,51 +53,59 @@ const FormScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 32, color: 'white', opacity: 0.9 }}>
-        Formularz
-      </Text>
-      {/* <View> */}
-      {arrForm.map((item) => {
-        return (
-          <Input
-            key={item.label}
-            label={item.label}
-            keyboardType={item.keyboardType}
-            value={item.value}
-            onChangeText={item.onChangeText}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 32, color: 'white', opacity: 0.9 }}>
+          Formularz
+        </Text>
+
+        {arrForm.map((item) => {
+          return (
+            <Input
+              key={item.label}
+              label={item.label}
+              keyboardType={item.keyboardType}
+              value={item.value}
+              onChangeText={item.onChangeText}
+            />
+          );
+        })}
+        <View style={{ justifyContent: 'center', width: '80%' }}>
+          <RNPickerSelect
+            onValueChange={(text) => setGenderText(text)}
+            items={[
+              { label: 'Mężczyzna', value: 'mężczyzna' },
+              { label: 'Kobieta', value: 'kobieta' }
+            ]}
+            style={{
+              ...pickerSelectStyles,
+              placeholder: {
+                color: '#222',
+                fontSize: 16,
+                backgroundColor: 'rgba(210,207,206,.3)'
+              }
+            }}
+            placeholder={placeholder}
           />
-        );
-      })}
-      <RNPickerSelect
-        onValueChange={(text) => setGenderText(text)}
-        items={[
-          { label: 'Mężczyzna', value: 'mężczyzna' },
-          { label: 'Kobieta', value: 'kobieta' }
-        ]}
-        style={{
-          ...pickerSelectStyles,
-          placeholder: {
-            color: '#222222',
-            fontSize: 16,
-            backgroundColor: 'rgba(210,207,206,.3)'
-          }
-        }}
-        placeholder={placeholder}
-      />
-      <Button
-        onPress={() => {
-          submitForm(ageText, genderText, weightText, heightText), clearForm();
-          navigation.navigate('Home');
-        }}
-        style={styles.button}
-        color='#5b2a83'
-        labelStyle={{ fontSize: 16 }}
-      >
-        Zatwierdź
-      </Button>
-      {/* </View> */}
-    </View>
+        </View>
+        <Button
+          onPress={() => {
+            submitForm(ageText, genderText, weightText, heightText),
+              clearForm();
+            navigation.navigate('Home');
+          }}
+          style={styles.button}
+          color='#5b2a83'
+          labelStyle={{ fontSize: 16 }}
+        >
+          Zatwierdź
+        </Button>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -101,9 +115,8 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     height: 65,
-    width: '80%',
     borderRadius: 10,
-    color: '#222222',
+    color: 'white',
     paddingRight: 30,
     backgroundColor: 'rgba(210,207,206,.3)',
     marginTop: 10

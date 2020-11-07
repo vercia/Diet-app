@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Button } from 'react-native-paper';
 import { AppContext } from './AppContext';
 import Input from './Input';
@@ -37,46 +37,54 @@ const RegistrationScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 32, color: 'white', opacity: 0.9, bottom: 10 }}>
-        Załóż konto
-      </Text>
-      {arrRegistration.map((item) => {
-        return (
-          <Input
-            key={item.label}
-            label={item.label}
-            value={item.value}
-            onChangeText={item.onChangeText}
-            keyboardType={item.keyboardType}
-            secureTextEntry={item.secureTextEntry}
-          />
-        );
-      })}
-      <View style={{ flexDirection: 'row', top: 10 }}>
-        <Button
-          onPress={() => {
-            navigation.navigate('LogIn');
-          }}
-          style={[styles.button, { width: '30%', margin: 10 }]}
-          color='#5b2a83'
-          labelStyle={{ fontSize: 16 }}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text
+          style={{ fontSize: 32, color: 'white', opacity: 0.9, bottom: 10 }}
         >
-          Cofnij
-        </Button>
-        <Button
-          onPress={() => {
-            register(nameText), clearForm();
-            navigation.navigate('Form');
-          }}
-          style={[styles.button, { width: '30%', margin: 10 }]}
-          color='#5b2a83'
-          labelStyle={{ fontSize: 16 }}
-        >
-          Dalej
-        </Button>
+          Załóż konto
+        </Text>
+        {arrRegistration.map((item) => {
+          return (
+            <Input
+              key={item.label}
+              label={item.label}
+              value={item.value}
+              onChangeText={item.onChangeText}
+              keyboardType={item.keyboardType}
+              secureTextEntry={item.secureTextEntry}
+            />
+          );
+        })}
+        <View style={{ flexDirection: 'row', top: 10 }}>
+          <Button
+            onPress={() => {
+              navigation.navigate('LogIn');
+            }}
+            style={[styles.button, { width: '30%', margin: 10 }]}
+            color='#5b2a83'
+            labelStyle={{ fontSize: 16 }}
+          >
+            Cofnij
+          </Button>
+          <Button
+            onPress={() => {
+              register(nameText), clearForm();
+              navigation.navigate('Form');
+            }}
+            style={[styles.button, { width: '30%', margin: 10 }]}
+            color='#5b2a83'
+            labelStyle={{ fontSize: 16 }}
+          >
+            Dalej
+          </Button>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
