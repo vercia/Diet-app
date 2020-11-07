@@ -12,10 +12,10 @@ const Profile = ({ navigation }) => {
     age,
     height,
     weight,
-    submitEdit,
     setAge,
     setHeight,
-    setWeight
+    setWeight,
+    name
   } = useContext(AppContext);
   const [ageText, setAgeText] = useState();
   const [heightText, setHeightText] = useState();
@@ -47,7 +47,8 @@ const Profile = ({ navigation }) => {
       keyboardType: 'number-pad',
       value: ageText,
       onChangeText: (text) => setAgeText(text),
-      submitEdit: submitEdit(ageText, setAge)
+      valueTwo: setAge,
+      keyValue: 'AGE_KEY'
     },
     {
       title: `Wzrost: ${height}`,
@@ -55,7 +56,8 @@ const Profile = ({ navigation }) => {
       keyboardType: 'number-pad',
       value: heightText,
       onChangeText: (text) => setHeightText(text),
-      submitEdit: submitEdit(heightText, setHeight)
+      valueTwo: setHeight,
+      keyValue: 'HEIGHT_KEY'
     },
     {
       title: `Waga: ${weight}`,
@@ -63,7 +65,8 @@ const Profile = ({ navigation }) => {
       keyboardType: 'number-pad',
       value: weightText,
       onChangeText: (text) => setWeightText(text),
-      submitEdit: submitEdit(weightText, setWeight)
+      valueTwo: setWeight,
+      keyValue: 'WEIGHT_KEY'
     }
   ];
 
@@ -83,7 +86,6 @@ const Profile = ({ navigation }) => {
           ) : (
             <Avatar.Image size={140} source={{ uri: photo.localUri }} />
           )}
-
           <Ionicons
             style={{ position: 'absolute', bottom: 10, right: 10 }}
             name='ios-add-circle'
@@ -96,7 +98,7 @@ const Profile = ({ navigation }) => {
       <Text
         style={{ color: 'white', fontSize: 20, top: 8, textAlign: 'center' }}
       >
-        Name
+        {name}
       </Text>
       <View
         style={{
@@ -123,7 +125,8 @@ const Profile = ({ navigation }) => {
                 keyboardType={item.keyboardType}
                 value={item.value}
                 onChangeText={item.onChangeText}
-                submitEdit={item.submitEdit}
+                valueTwo={item.valueTwo}
+                keyValue={item.keyValue}
               />
             );
           })}

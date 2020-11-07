@@ -34,7 +34,7 @@ const FormScreen = ({ navigation }) => {
   const arrForm = [
     {
       label: 'Wiek',
-      keyboardType: 'number-pad',
+      keyboardType: 'numeric',
       value: ageText,
       onChangeText: (text) => setAgeText(text)
     },
@@ -94,7 +94,7 @@ const FormScreen = ({ navigation }) => {
         </View>
         <Button
           onPress={() => {
-            submitForm(ageText, genderText, weightText, heightText),
+            submitForm(ageText, genderText, weightText, heightText);
               clearForm();
             navigation.navigate('Home');
           }}

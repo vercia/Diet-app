@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View } from 'react-native';
 import { List, Dialog, Portal, Button, TextInput } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './Styles'
+import { AppContext } from './AppContext';
 
 const DialogProfile = (props) => {
   const [visible, setVisible] = React.useState(false);
+  const {submitEdit} = useContext(AppContext)
 
   const showDialog = () => setVisible(!visible);
 
@@ -37,10 +39,8 @@ const DialogProfile = (props) => {
           <Dialog.Actions>
             <Button
               onPress={() => {
+                submitEdit(props.value,props.valueTwo,props.keyValue,props.value)
                 showDialog();
-                {
-                  props.submitEdit;
-                }
               }}
             >
               Done
