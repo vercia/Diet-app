@@ -56,7 +56,7 @@ const FoodCard = (props) => {
         <Dialog
           visible={visible}
           onDismiss={hideDialog}
-          style={{ maxHeight: '70%' }}
+          style={[styles.dialog,{ maxHeight: '70%' }]}
         >
           <Dialog.Title>{props.title}</Dialog.Title>
           <Dialog.ScrollArea>

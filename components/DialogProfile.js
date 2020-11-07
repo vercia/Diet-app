@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { List, Dialog, Portal, Button, TextInput } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from './Styles'
 
 const DialogProfile = (props) => {
   const [visible, setVisible] = React.useState(false);
@@ -16,20 +17,21 @@ const DialogProfile = (props) => {
           <MaterialCommunityIcons
             name='pencil'
             size={24}
-            color='black'
+            color='#222'
             onPress={showDialog}
           />
         )}
       />
       <Portal>
-        <Dialog visible={visible} onDismiss={showDialog}>
+        <Dialog visible={visible} onDismiss={showDialog} style={styles.dialog}>
           <Dialog.Title>Edit</Dialog.Title>
-          <Dialog.Content>
+          <Dialog.Content style={{ alignItems: 'center' }}>
             <TextInput
               label={props.label}
               keyboardType={props.keyboardType}
               value={props.value}
               onChangeText={props.onChangeText}
+              style={styles.input}
             />
           </Dialog.Content>
           <Dialog.Actions>
