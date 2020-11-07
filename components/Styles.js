@@ -27,12 +27,12 @@ export default StyleSheet.create({
     top: 10
   },
   macroTitle: {
-    color: '#222',
-    fontSize: 22
+    color: 'white',
+    fontSize: 18
   },
   macrosDesc: {
-    color: 'white',
-    fontSize: 18,
+    color: '#222',
+    fontSize: 16,
     top: 5
   },
   progressBar: {
@@ -64,5 +64,8 @@ export default StyleSheet.create({
     backgroundColor: '#222',
     borderBottomRightRadius: 4,
     borderBottomLeftRadius: 4
+  },
+  dialog: {
+    backgroundColor: '#222'
   }
 });
