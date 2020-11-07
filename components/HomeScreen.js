@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     justifyContent: 'space-around',
-    top: 20
+    top: 40
   }
 });
 
