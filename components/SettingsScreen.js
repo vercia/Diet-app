@@ -1,14 +1,20 @@
-import React, {useContext} from 'react';
-import { Text, View, Button } from 'react-native';
-import { AppContext } from './AppContext';
+import React from 'react';
+import { View } from 'react-native';
+import { Button } from 'react-native-paper'
+import styles from './Styles'
 
 const SettingsScreen = ({navigation}) => {
-  const {name,age,gender,weight,height} = useContext(AppContext)
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Button title='Profile' onPress={() => navigation.navigate('Profile')} />
-      <Button title='Wyloguj się' onPress={() => navigation.navigate('LogIn')} />
+ return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Button onPress={() => navigation.navigate('Profile')}>Profile</Button>
+      <Button
+        style={styles.button}
+        color='#5b2a83'
+        labelStyle={{ fontSize: 16 }}
+        onPress={() => navigation.navigate('LogIn')}
+      >
+        Wyloguj się
+      </Button>
     </View>
   );
 };
