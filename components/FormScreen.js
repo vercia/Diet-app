@@ -52,17 +52,17 @@ const FormScreen = ({ navigation }) => {
         Formularz
       </Text>
       {/* <View> */}
-        {arrForm.map((item) => {
-          return (
-            <Input
-              key={item.label}
-              label={item.label}
-              keyboardType={item.keyboardType}
-              value={item.value}
-              onChangeText={item.onChangeText}
-            />
-          );
-        })}
+      {arrForm.map((item) => {
+        return (
+          <Input
+            key={item.label}
+            label={item.label}
+            keyboardType={item.keyboardType}
+            value={item.value}
+            onChangeText={item.onChangeText}
+          />
+        );
+      })}
       <RNPickerSelect
         onValueChange={(text) => setGenderText(text)}
         items={[
@@ -85,7 +85,7 @@ const FormScreen = ({ navigation }) => {
           navigation.navigate('Home');
         }}
         style={styles.button}
-        color='#222222'
+        color='#5b2a83'
         labelStyle={{ fontSize: 16 }}
       >
         Zatwierdź

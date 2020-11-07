@@ -57,7 +57,7 @@ const FoodScreen = () => {
       <Button
         onPress={getData}
         style={[styles.button, { marginBottom: 10 }]}
-        color='#222222'
+        color='#5b2a83'
         labelStyle={{ fontSize: 16 }}
       >
         Search

@@ -20,7 +20,7 @@ const LogInScreen = ({ navigation }) => {
       <Button
         onPress={() => navigation.navigate('Home')}
         style={styles.button}
-        color='#222222'
+        color='#5b2a83'
         labelStyle={{ fontSize: 16 }}
       >
         Zaloguj
@@ -28,7 +28,7 @@ const LogInScreen = ({ navigation }) => {
       <Button
         onPress={() => navigation.navigate('Registration')}
         style={styles.button}
-        color='#222222'
+        color='#5b2a83'
         labelStyle={{ fontSize: 16 }}
       >
         Zajerestruj się
