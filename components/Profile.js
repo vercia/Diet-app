@@ -15,13 +15,14 @@ const Profile = ({ navigation }) => {
     setAge,
     setHeight,
     setWeight,
-    name
+    name,
+    photo,
+    setPhoto,
+    photoData
   } = useContext(AppContext);
   const [ageText, setAgeText] = useState();
   const [heightText, setHeightText] = useState();
   const [weightText, setWeightText] = useState();
-
-  const [photo, setPhoto] = useState(null);
 
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -37,7 +38,8 @@ const Profile = ({ navigation }) => {
       return;
     }
 
-    setPhoto({ localUri: pickerResult.uri });
+    setPhoto(pickerResult.uri);
+    photoData(pickerResult.uri)
   };
 
   const arrDialog = [
@@ -84,7 +86,7 @@ const Profile = ({ navigation }) => {
           {photo == null ? (
             <Avatar.Image size={140} source={require('../images/avatar.png')} />
           ) : (
-            <Avatar.Image size={140} source={{ uri: photo.localUri }} />
+            <Avatar.Image size={140} source={{ uri: photo }} />
           )}
           <Ionicons
             style={{ position: 'absolute', bottom: 10, right: 10 }}
@@ -92,7 +94,7 @@ const Profile = ({ navigation }) => {
             size={32}
             color='#00dfc0'
             onPress={openImagePickerAsync}
-          />
+        />
         </View>
       </View>
       <Text

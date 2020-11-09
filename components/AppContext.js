@@ -18,13 +18,14 @@ export default function AppContextProvider(props) {
   const [eatenProteins, setEatenProteins] = useState(0);
   const [eatenFats, setEatenFats] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [photo, setPhoto] = useState(null);
 
   const submitForm = (ageText, genderText, weightText, heightText) => {
     setAge(ageText);
     setGender(genderText);
     setWeight(weightText);
     setHeight(heightText);
-    formData(ageText, genderText, weightText, heightText)
+    formData(ageText, genderText, weightText, heightText);
   };
 
   const register = (nameText) => {
@@ -37,7 +38,7 @@ export default function AppContextProvider(props) {
     setCarbos(Math.floor(weight * 1.5));
     setProteins(Math.floor(weight * 2));
     setFats(Math.floor(weight * 1.2));
-  }, [weight, age]);
+  }, [weight, age, height]);
 
   useEffect(() => {
     setProgress(eatenCalories / calories);
@@ -50,46 +51,46 @@ export default function AppContextProvider(props) {
     setEatenFats(Math.floor(eatenFats + fats));
   };
 
-  const submitEdit = (item,func,keyValue,value) => {
-    func(item)
-    editData(keyValue, value)
-  }
+  const submitEdit = (item, func, keyValue, value) => {
+    func(item);
+    editData(keyValue, value);
+  };
 
   //registration async
   const registrationData = async (nameText) => {
     try {
-      await AsyncStorage.setItem('NAME_KEY', nameText)
+      await AsyncStorage.setItem('NAME_KEY', nameText);
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  }
+  };
 
   const getRegistrationData = async () => {
     try {
-      const name = await AsyncStorage.getItem('NAME_KEY')
+      const name = await AsyncStorage.getItem('NAME_KEY');
       if (name !== null) {
-        setName(name)
+        setName(name);
       }
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  }
+  };
 
   //form async
   const formData = async (ageText, genderText, weightText, heightText) => {
     try {
-      await AsyncStorage.setItem('AGE_KEY', ageText)
+      await AsyncStorage.setItem('AGE_KEY', ageText);
       await AsyncStorage.setItem('GENDER_KEY', genderText);
       await AsyncStorage.setItem('WEIGHT_KEY', weightText);
       await AsyncStorage.setItem('HEIGHT_KEY', heightText);
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  }
+  };
 
   const getFormData = async () => {
     try {
-      const age = await AsyncStorage.getItem('AGE_KEY')
+      const age = await AsyncStorage.getItem('AGE_KEY');
       const gender = await AsyncStorage.getItem('GENDER_KEY');
       const weight = await AsyncStorage.getItem('WEIGHT_KEY');
       const height = await AsyncStorage.getItem('HEIGHT_KEY');
@@ -100,23 +101,74 @@ export default function AppContextProvider(props) {
         setHeight(height);
       }
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  }
-
-  useEffect(() => {
-    getRegistrationData();
-    getFormData()
-  }, [])
+  };
 
   //edit data async
   const editData = async (keyValue, value) => {
     try {
-      await AsyncStorage.setItem(keyValue, value)
+      await AsyncStorage.setItem(keyValue, value);
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  }
+  };
+
+  //progress async
+  // const progressData = async (calories, carbos, proteins, fats) => {
+  //   try {
+  //     await AsyncStorage.setItem('CALORIES_KEY', calories);
+  //     await AsyncStorage.setItem('CARBOS_KEY', carbos);
+  //     await AsyncStorage.setItem('PROTEINS_KEY', proteins);
+  //     await AsyncStorage.setItem('FATS_KEY', fats);
+  //   } catch (e) {
+  //     alert(e);
+  //   }
+  // };
+
+  // const getProgressData = async () => {
+  //   try {
+  //     const calories = await AsyncStorage.getItem('CALORIES_KEY');
+  //     const carbos = await AsyncStorage.getItem('CARBOS_KEY');
+  //     const proteins = await AsyncStorage.getItem('PROTEINS_KEY');
+  //     const fats = await AsyncStorage.getItem('FATS_KEY');
+  //     if (calories !== null) {
+  //       setCalories(calories);
+  //       setCarbos(carbos);
+  //       setProteins(proteins);
+  //       setFats(fats);
+  //     }
+  //   } catch (e) {
+  //     alert(e);
+  //   }
+  // };
+
+  //image async
+  const photoData = async (photo) => {
+    try {
+      await AsyncStorage.setItem('PHOTO_KEY', photo);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  const getPhotoData = async () => {
+    try {
+      const photo = await AsyncStorage.getItem('PHOTO_KEY');
+      if (photo !== null) {
+        setPhoto(photo);
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+
+  useEffect(() => {
+    getRegistrationData();
+    getFormData();
+    getPhotoData();
+  }, []);
 
   return (
     <AppContext.Provider
@@ -141,7 +193,10 @@ export default function AppContextProvider(props) {
         submitEdit,
         setAge,
         setHeight,
-        setWeight
+        setWeight,
+        photo,
+        setPhoto,
+        photoData
       }}
     >
       {props.children}
