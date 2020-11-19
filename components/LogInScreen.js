@@ -107,7 +107,10 @@ const LogInScreen = ({ navigation }) => {
             visible={visibleSnackbar}
             onDismiss={() => setVisibleSnackbar(!visibleSnackbar)}
             action={{
-              label: 'OK'
+              label: 'OK',
+              onPress: () => {
+                setVisibleSnackbar(!visibleSnackbar);
+              }
             }}
           >
             Uzupełnij dane

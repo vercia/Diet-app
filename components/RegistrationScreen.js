@@ -19,19 +19,23 @@ const RegistrationScreen = ({ navigation }) => {
     setEmail,
     password,
     setPassword,
-    visibleSnackbarRegistration,
-    setVisibleSnackbarRegistration,
+    visibleSnackbarRegistr,
+    setVisibleSnackbarRegistr,
     errorInput,
-    setErrorInput
+    setErrorInput,
+    confirmPassword,
+    setConfirmPassword
   } = useContext(AppContext);
   const [nameText, setNameText] = useState('');
 
   const clearForm = () => {
     setNameText('');
+    setEmail('');
+    setPassword('');
   };
 
   const onToggleSnackBar = () => {
-    setVisibleSnackbarRegistration(!visibleSnackbarRegistration);
+    setVisibleSnackbarRegistr(!visibleSnackbarRegistr);
   };
 
   const onSignUpPress = () => {
@@ -39,11 +43,12 @@ const RegistrationScreen = ({ navigation }) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
+        register(nameText), clearForm();
         navigation.navigate('Form');
       })
       .catch((e) => {
-        setErrorInput('Podaj dane...');
-        setVisibleSnackbarRegistration(true);
+        setErrorInput('Podany email już istnieje');
+        setVisibleSnackbarRegistr(true);
       });
   };
 
@@ -69,9 +74,30 @@ const RegistrationScreen = ({ navigation }) => {
       label: 'Potwierdź hasło',
       keyboardType: 'default',
       secureTextEntry: true,
-      onChangeText: (password) => setPassword(password)
+      onChangeText: (confirmPassword) => setConfirmPassword(confirmPassword)
     }
   ];
+
+  const handleFormRegister = () => {
+    if (nameText === '') {
+      setErrorInput('Podaj imię');
+      onToggleSnackBar();
+    } else if (password !== confirmPassword) {
+      setErrorInput('Hasła się różnią');
+      onToggleSnackBar();
+    } else if (email === '') {
+      setErrorInput('Podaj email');
+      onToggleSnackBar();
+    } else if (password === '' && confirmPassword === '') {
+      setErrorInput('Podaj hasło');
+      onToggleSnackBar();
+    } else if (password.length < 6 || confirmPassword.length < 6) {
+      setErrorInput('Hasło powinno składać się z conajmniej 6 znaków');
+      onToggleSnackBar();
+    } else {
+      onSignUpPress();
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -116,9 +142,7 @@ const RegistrationScreen = ({ navigation }) => {
             </Button>
             <Button
               onPress={() => {
-                errorInput ? onToggleSnackBar() : onSignUpPress();
-                // register(nameText), clearForm();
-                // onSignUpPress()
+                handleFormRegister();
               }}
               style={[styles.button, { width: '30%', margin: 10 }]}
               color='#5b2a83'
@@ -128,12 +152,13 @@ const RegistrationScreen = ({ navigation }) => {
             </Button>
           </View>
           <Snackbar
-            visible={visibleSnackbarRegistration}
-            onDismiss={() =>
-              setVisibleSnackbarRegistration(!visibleSnackbarRegistration)
-            }
+            visible={visibleSnackbarRegistr}
+            onDismiss={() => setVisibleSnackbarRegistr(!visibleSnackbarRegistr)}
             action={{
-              label: 'OK'
+              label: 'OK',
+              onPress: () => {
+                setVisibleSnackbarRegistr(!visibleSnackbarRegistr);
+              }
             }}
           >
             {errorInput}

@@ -7,28 +7,36 @@ import {
   Keyboard
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { Button } from 'react-native-paper';
+import { Button, Snackbar } from 'react-native-paper';
 import { AppContext } from './AppContext';
 import Input from './Input';
 import styles from './Styles';
 
 const FormScreen = ({ navigation }) => {
-  const { submitForm } = useContext(AppContext);
-  const [ageText, setAgeText] = useState();
-  const [genderText, setGenderText] = useState();
-  const [weightText, setWeightText] = useState();
-  const [heightText, setHeightText] = useState();
-
   const placeholder = {
     label: 'Wybierz płeć...',
     value: null
   };
+
+  const {
+    submitForm,
+    visibleSnackbarForm,
+    setVisibleSnackbarForm
+  } = useContext(AppContext);
+  const [ageText, setAgeText] = useState('');
+  const [genderText, setGenderText] = useState(placeholder.label);
+  const [weightText, setWeightText] = useState('');
+  const [heightText, setHeightText] = useState('');
 
   const clearForm = () => {
     setAgeText('');
     setGenderText(placeholder.label);
     setWeightText('');
     setHeightText('');
+  };
+
+  const onToggleSnackBar = () => {
+    setVisibleSnackbarForm(!visibleSnackbarForm);
   };
 
   const arrForm = [
@@ -94,9 +102,14 @@ const FormScreen = ({ navigation }) => {
         </View>
         <Button
           onPress={() => {
-            submitForm(ageText, genderText, weightText, heightText);
-              clearForm();
-            navigation.navigate('Home');
+            ageText === '' ||
+            genderText === placeholder.label ||
+            weightText === '' ||
+            heightText === ''
+              ? onToggleSnackBar()
+              : (submitForm(ageText, genderText, weightText, heightText),
+                clearForm(),
+                navigation.navigate('Home'));
           }}
           style={styles.button}
           color='#5b2a83'
@@ -104,6 +117,18 @@ const FormScreen = ({ navigation }) => {
         >
           Zatwierdź
         </Button>
+        <Snackbar
+          visible={visibleSnackbarForm}
+          onDismiss={() => setVisibleSnackbarForm(!visibleSnackbarForm)}
+          action={{
+            label: 'OK',
+            onPress: () => {
+              setVisibleSnackbarForm(!visibleSnackbarForm);
+            }
+          }}
+        >
+          Wprowadź dane
+        </Snackbar>
       </View>
     </TouchableWithoutFeedback>
   );
