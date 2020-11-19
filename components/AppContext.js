@@ -19,6 +19,12 @@ export default function AppContextProvider(props) {
   const [eatenFats, setEatenFats] = useState(0);
   const [progress, setProgress] = useState(0);
   const [photo, setPhoto] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
+  const [visibleSnackbarRegistration, setVisibleSnackbarRegistration] = useState(false);
+  const [errorInput, setErrorInput] = useState('');
 
   const submitForm = (ageText, genderText, weightText, heightText) => {
     setAge(ageText);
@@ -196,7 +202,19 @@ export default function AppContextProvider(props) {
         setWeight,
         photo,
         setPhoto,
-        photoData
+        photoData,
+        email,
+        password,
+        setEmail,
+        setPassword,
+        error,
+        setError,
+        visibleSnackbar,
+        setVisibleSnackbar,
+        visibleSnackbarRegistration,
+        setVisibleSnackbarRegistration,
+        errorInput,
+        setErrorInput
       }}
     >
       {props.children}
