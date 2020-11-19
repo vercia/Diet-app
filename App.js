@@ -3,7 +3,10 @@ import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme
 } from '@react-navigation/native';
-import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import {
+  DefaultTheme as PaperDefaultTheme,
+  Provider as PaperProvider
+} from 'react-native-paper';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppContextProvider from './components/AppContext';
@@ -18,6 +21,7 @@ function LogInStackScreen() {
   return (
     <LogInStack.Navigator
       screenOptions={{
+        gestureEnabled: false,
         headerShown: false
       }}
     >

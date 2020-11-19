@@ -21,9 +21,11 @@ export default function AppContextProvider(props) {
   const [photo, setPhoto] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [visibleSnackbar, setVisibleSnackbar] = useState(false);
-  const [visibleSnackbarRegistration, setVisibleSnackbarRegistration] = useState(false);
+  const [visibleSnackbarRegistr, setVisibleSnackbarRegistr] = useState(false);
+  const [visibleSnackbarForm, setVisibleSnackbarForm] = useState(false);
   const [errorInput, setErrorInput] = useState('');
 
   const submitForm = (ageText, genderText, weightText, heightText) => {
@@ -169,7 +171,6 @@ export default function AppContextProvider(props) {
     }
   };
 
-
   useEffect(() => {
     getRegistrationData();
     getFormData();
@@ -211,10 +212,14 @@ export default function AppContextProvider(props) {
         setError,
         visibleSnackbar,
         setVisibleSnackbar,
-        visibleSnackbarRegistration,
-        setVisibleSnackbarRegistration,
+        visibleSnackbarRegistr,
+        setVisibleSnackbarRegistr,
         errorInput,
-        setErrorInput
+        setErrorInput,
+        visibleSnackbarForm,
+        setVisibleSnackbarForm,
+        confirmPassword,
+        setConfirmPassword
       }}
     >
       {props.children}
