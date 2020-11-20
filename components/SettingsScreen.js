@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View } from 'react-native';
 import { Button, List, Divider } from 'react-native-paper';
 import styles from './Styles';
+import { AppContext } from './AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SettingsScreen = ({ navigation }) => {
+  const {loginData} = useContext(AppContext)
+
   return (
     <View style={{ flex: 1, alignItems: 'center', top: 40 }}>
       <List.Item
@@ -38,9 +42,23 @@ const SettingsScreen = ({ navigation }) => {
         style={styles.button}
         color='#5b2a83'
         labelStyle={{ fontSize: 16 }}
-        onPress={() => navigation.navigate('LogIn')}
+        onPress={() => {
+          navigation.navigate('LogIn');
+          loginData(false);
+        }}
       >
         Wyloguj się
+      </Button>
+      <Button
+        style={styles.button}
+        color='#5b2a83'
+        labelStyle={{ fontSize: 16 }}
+        onPress={() => {
+            AsyncStorage.clear()
+           
+        }}
+      >
+        Clear
       </Button>
     </View>
   );
