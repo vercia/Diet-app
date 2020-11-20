@@ -62,7 +62,7 @@ const FoodCard = (props) => {
           <Dialog.ScrollArea>
             <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
               {props.ingredients.map((item) => (
-                <Paragraph>{item}</Paragraph>
+                <Paragraph key={item}>{item}</Paragraph>
               ))}
             </ScrollView>
           </Dialog.ScrollArea>
