@@ -27,7 +27,7 @@ const FoodScreen = () => {
   const render = ({ item, index }) => {
     return (
       <FoodCard
-        key={item.recipe.label}
+        key={Math.random()}
         title={item.recipe.label}
         image={item.recipe.image}
         calories={item.recipe.calories}
@@ -65,7 +65,7 @@ const FoodScreen = () => {
       <FlatList
         data={dataSource}
         renderItem={render}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );
