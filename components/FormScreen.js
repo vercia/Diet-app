@@ -21,7 +21,8 @@ const FormScreen = ({ navigation }) => {
   const {
     submitForm,
     visibleSnackbarForm,
-    setVisibleSnackbarForm
+    setVisibleSnackbarForm,
+    loginData
   } = useContext(AppContext);
   const [ageText, setAgeText] = useState('');
   const [genderText, setGenderText] = useState(placeholder.label);
@@ -109,7 +110,8 @@ const FormScreen = ({ navigation }) => {
               ? onToggleSnackBar()
               : (submitForm(ageText, genderText, weightText, heightText),
                 clearForm(),
-                navigation.navigate('Home'));
+                navigation.navigate('Home'),
+                loginData(true));
           }}
           style={styles.button}
           color='#5b2a83'

@@ -4,8 +4,7 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
-  Text
+  KeyboardAvoidingView
 } from 'react-native';
 import {
   TextInput,
@@ -29,11 +28,12 @@ const LogInScreen = ({ navigation }) => {
     error,
     setError,
     visibleSnackbar,
-    setVisibleSnackbar
+    setVisibleSnackbar,
+    loginData
   } = useContext(AppContext);
 
   const onToggleSnackBar = () => {
-    setVisibleSnackbar(!visibleSnackbar)
+    setVisibleSnackbar(!visibleSnackbar);
   };
 
   const hideDialog = () => setVisible(false);
@@ -44,6 +44,7 @@ const LogInScreen = ({ navigation }) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         navigation.navigate('Home');
+        loginData(true);
       })
       .catch((e) => {
         setError('Błędne dane logowania.. Spróbuj ponownie.');
@@ -73,19 +74,21 @@ const LogInScreen = ({ navigation }) => {
             style={styles.input}
             label='Email'
             keyboardType='email-address'
+            value={email}
             onChangeText={(email) => setEmail(email)}
           />
           <TextInput
             style={styles.input}
             label='Hasło'
             secureTextEntry={true}
+            value={password}
             onChangeText={(password) => setPassword(password)}
           />
           <Button
             onPress={() =>
               email === '' && password === ''
                 ? onToggleSnackBar()
-                : onLoginPress()
+                : (onLoginPress(), setEmail(''), setPassword(''))
             }
             style={styles.button}
             color='#5b2a83'
