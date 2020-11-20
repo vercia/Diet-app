@@ -27,6 +27,7 @@ export default function AppContextProvider(props) {
   const [visibleSnackbarRegistr, setVisibleSnackbarRegistr] = useState(false);
   const [visibleSnackbarForm, setVisibleSnackbarForm] = useState(false);
   const [errorInput, setErrorInput] = useState('');
+  const [login, setLogin] = useState(false)
 
   const submitForm = (ageText, genderText, weightText, heightText) => {
     setAge(ageText);
@@ -57,6 +58,7 @@ export default function AppContextProvider(props) {
     setEatenCarbos(Math.floor(eatenCarbos + carbos));
     setEatenProteins(Math.floor(eatenProteins + proteins));
     setEatenFats(Math.floor(eatenFats + fats));
+    progressData(calories, carbos, proteins, fats);
   };
 
   const submitEdit = (item, func, keyValue, value) => {
@@ -123,33 +125,50 @@ export default function AppContextProvider(props) {
   };
 
   //progress async
-  // const progressData = async (calories, carbos, proteins, fats) => {
-  //   try {
-  //     await AsyncStorage.setItem('CALORIES_KEY', calories);
-  //     await AsyncStorage.setItem('CARBOS_KEY', carbos);
-  //     await AsyncStorage.setItem('PROTEINS_KEY', proteins);
-  //     await AsyncStorage.setItem('FATS_KEY', fats);
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
+  const progressData = async (
+    calories,
+    carbos,
+    proteins,
+    fats
+  ) => {
+    try {
+      await AsyncStorage.setItem(
+        'CALORIES_KEY',
+        JSON.stringify(Math.floor(eatenCalories + calories))
+      );
+      await AsyncStorage.setItem(
+        'CARBOS_KEY',
+        JSON.stringify(Math.floor(eatenCarbos + carbos))
+      );
+      await AsyncStorage.setItem(
+        'PROTEINS_KEY',
+        JSON.stringify(Math.floor(eatenProteins + proteins))
+      );
+      await AsyncStorage.setItem(
+        'FATS_KEY',
+        JSON.stringify(Math.floor(eatenFats + fats))
+      );
+    } catch (e) {
+      alert(e);
+    }
+  };
 
-  // const getProgressData = async () => {
-  //   try {
-  //     const calories = await AsyncStorage.getItem('CALORIES_KEY');
-  //     const carbos = await AsyncStorage.getItem('CARBOS_KEY');
-  //     const proteins = await AsyncStorage.getItem('PROTEINS_KEY');
-  //     const fats = await AsyncStorage.getItem('FATS_KEY');
-  //     if (calories !== null) {
-  //       setCalories(calories);
-  //       setCarbos(carbos);
-  //       setProteins(proteins);
-  //       setFats(fats);
-  //     }
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
+  const getProgressData = async () => {
+    try {
+      const eatenCalories = await AsyncStorage.getItem('CALORIES_KEY');
+      const eatenCarbos = await AsyncStorage.getItem('CARBOS_KEY');
+      const eatenProteins = await AsyncStorage.getItem('PROTEINS_KEY');
+      const eatenfats = await AsyncStorage.getItem('FATS_KEY');
+      if (eatenCalories !== null) {
+        setEatenCalories(JSON.parse(eatenCalories));
+        setEatenCarbos(JSON.parse(eatenCarbos));
+        setEatenProteins(JSON.parse(eatenProteins));
+        setEatenFats(JSON.parse(eatenfats));
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   //image async
   const photoData = async (photo) => {
@@ -171,10 +190,33 @@ export default function AppContextProvider(props) {
     }
   };
 
+  //login async
+  const loginData = async(login) => {
+    try {
+      const jsonValue = JSON.stringify(login)
+      await AsyncStorage.setItem('LOGIN_KEY', jsonValue);
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const getLoginData = async() => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('LOGIN_KEY')
+      if (jsonValue!==null){
+        setLogin(JSON.parse(jsonValue))
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   useEffect(() => {
     getRegistrationData();
     getFormData();
     getPhotoData();
+    getLoginData()
+    getProgressData()
   }, []);
 
   return (
@@ -219,7 +261,10 @@ export default function AppContextProvider(props) {
         visibleSnackbarForm,
         setVisibleSnackbarForm,
         confirmPassword,
-        setConfirmPassword
+        setConfirmPassword,
+        login,
+        setLogin,
+        loginData
       }}
     >
       {props.children}
