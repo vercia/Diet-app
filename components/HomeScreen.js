@@ -15,9 +15,9 @@ const HomeScreen = () => {
   } = useContext(AppContext);
 
   const macroInfo = [
-    { header: 'Węglowodany', firstValue: eatenCarbos, secondValue: carbos },
-    { header: 'Białka', firstValue: eatenProteins, secondValue: proteins },
-    { header: 'Tłuszcze', firstValue: eatenFats, secondValue: fats }
+    { header: 'Carbos', firstValue: eatenCarbos, secondValue: carbos },
+    { header: 'Proteins', firstValue: eatenProteins, secondValue: proteins },
+    { header: 'Fats', firstValue: eatenFats, secondValue: fats }
   ];
 
   return (

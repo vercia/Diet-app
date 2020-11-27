@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import { AppContext } from './AppContext';
 import styles from './Styles'
@@ -9,7 +9,7 @@ const Calories = () => {
 
   return (
     <View style={{ alignItems: 'center' }}>
-      <Text style={styles.caloriesTitle}>Kalorie</Text>
+      <Text style={styles.caloriesTitle}>Calories</Text>
       <ProgressBar
         progress={progress}
         color={'#00dfc0'}

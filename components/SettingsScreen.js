@@ -47,7 +47,7 @@ const SettingsScreen = ({ navigation }) => {
           loginData(false);
         }}
       >
-        Wyloguj się
+        Log out
       </Button>
       <Button
         style={styles.button}

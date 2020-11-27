@@ -68,9 +68,7 @@ const FormScreen = ({ navigation }) => {
       }}
     >
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 32, color: 'white', opacity: 0.9 }}>
-          Formularz
-        </Text>
+        <Text style={{ fontSize: 32, color: 'white', opacity: 0.9 }}>Form</Text>
 
         {arrForm.map((item) => {
           return (
@@ -117,7 +115,7 @@ const FormScreen = ({ navigation }) => {
           color='#5b2a83'
           labelStyle={{ fontSize: 16 }}
         >
-          Zatwierdź
+          Accept
         </Button>
         <Snackbar
           visible={visibleSnackbarForm}
@@ -129,7 +127,7 @@ const FormScreen = ({ navigation }) => {
             }
           }}
         >
-          Wprowadź dane
+          Enter informations
         </Snackbar>
       </View>
     </TouchableWithoutFeedback>

@@ -47,7 +47,7 @@ const LogInScreen = ({ navigation }) => {
         loginData(true);
       })
       .catch((e) => {
-        setError('Błędne dane logowania.. Spróbuj ponownie.');
+        setError('Invalid login informations... Please try again.');
         setVisible(true);
       });
   };
@@ -94,7 +94,7 @@ const LogInScreen = ({ navigation }) => {
             color='#5b2a83'
             labelStyle={{ fontSize: 16 }}
           >
-            Zaloguj
+            Log in
           </Button>
           <Button
             onPress={() => {
@@ -104,7 +104,7 @@ const LogInScreen = ({ navigation }) => {
             color='#5b2a83'
             labelStyle={{ fontSize: 16 }}
           >
-            Zarejestruj się
+            Sign up
           </Button>
           <Snackbar
             visible={visibleSnackbar}
@@ -116,11 +116,11 @@ const LogInScreen = ({ navigation }) => {
               }
             }}
           >
-            Uzupełnij dane
+            Enter informations
           </Snackbar>
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-              <Dialog.Title style={{ color: 'black' }}>Błąd</Dialog.Title>
+              <Dialog.Title style={{ color: 'black' }}>Error</Dialog.Title>
               <Dialog.Content>
                 <Paragraph style={{ color: 'black' }}>{error}</Paragraph>
               </Dialog.Content>

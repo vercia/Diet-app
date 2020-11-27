@@ -115,7 +115,7 @@ const RegistrationScreen = ({ navigation }) => {
           <Text
             style={{ fontSize: 32, color: 'white', opacity: 0.9, bottom: 10 }}
           >
-            Załóż konto
+            Create an account
           </Text>
           {arrRegistration.map((item) => {
             return (
@@ -138,7 +138,7 @@ const RegistrationScreen = ({ navigation }) => {
               color='#5b2a83'
               labelStyle={{ fontSize: 16 }}
             >
-              Cofnij
+              Back
             </Button>
             <Button
               onPress={() => {
@@ -148,7 +148,7 @@ const RegistrationScreen = ({ navigation }) => {
               color='#5b2a83'
               labelStyle={{ fontSize: 16 }}
             >
-              Dalej
+              Next
             </Button>
           </View>
           <Snackbar

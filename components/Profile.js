@@ -39,13 +39,13 @@ const Profile = ({ navigation }) => {
     }
 
     setPhoto(pickerResult.uri);
-    photoData(pickerResult.uri)
+    photoData(pickerResult.uri);
   };
 
   const arrDialog = [
     {
-      title: `Wiek: ${age}`,
-      label: 'Wiek',
+      title: `Age: ${age}`,
+      label: 'Age',
       keyboardType: 'number-pad',
       value: ageText,
       onChangeText: (text) => setAgeText(text),
@@ -53,8 +53,8 @@ const Profile = ({ navigation }) => {
       keyValue: 'AGE_KEY'
     },
     {
-      title: `Wzrost: ${height}`,
-      label: 'Wzrost',
+      title: `Height: ${height}`,
+      label: 'Height',
       keyboardType: 'number-pad',
       value: heightText,
       onChangeText: (text) => setHeightText(text),
@@ -62,8 +62,8 @@ const Profile = ({ navigation }) => {
       keyValue: 'HEIGHT_KEY'
     },
     {
-      title: `Waga: ${weight}`,
-      label: 'Waga',
+      title: `Weight: ${weight}`,
+      label: 'Weight',
       keyboardType: 'number-pad',
       value: weightText,
       onChangeText: (text) => setWeightText(text),
@@ -94,7 +94,7 @@ const Profile = ({ navigation }) => {
             size={32}
             color='#00dfc0'
             onPress={openImagePickerAsync}
-        />
+          />
         </View>
       </View>
       <Text
@@ -116,7 +116,7 @@ const Profile = ({ navigation }) => {
             borderRadius: 10
           }}
         >
-          <List.Subheader>Twoje dane</List.Subheader>
+          <List.Subheader>Your informations</List.Subheader>
           <List.Item title={`Płeć: ${gender}`} />
           {arrDialog.map((item) => {
             return (
